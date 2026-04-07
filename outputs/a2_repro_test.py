@@ -4,12 +4,10 @@ Reproduces: AttributeError: 'NoneType' object has no attribute 'transaction_id'
 """
 import sys
 import os
-from pathlib import Path
 
-# Add mini_repo to path using a path relative to this script
-project_root = Path(__file__).resolve().parents[1]
-mini_repo = project_root / "bug_triage" / "data" / "mini_repo"
-sys.path.insert(0, str(mini_repo))
+# Add mini_repo to path using absolute path
+mini_repo = r"C:\Users\suraj\OneDrive\Documents\Multi-Agent System\bug_triage\data\mini_repo"
+sys.path.insert(0, mini_repo)
 
 from app import handle_checkout
 
