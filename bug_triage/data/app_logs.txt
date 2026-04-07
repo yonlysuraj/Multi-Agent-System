@@ -1,0 +1,254 @@
+[2026-04-05T14:00:01Z] INFO  Application started — v2.4.1, Smart Checkout v2 enabled
+[2026-04-05T14:00:02Z] INFO  Connected to PostgreSQL at db-prod-01:5432
+[2026-04-05T14:00:02Z] INFO  Payment gateway StripeConnect v4.2 initialized
+[2026-04-05T14:00:05Z] INFO  Health check endpoint /health responding OK
+[2026-04-05T14:01:12Z] INFO  [REQ-1001] POST /api/v2/checkout — user_id=4521, amount=$45.99
+[2026-04-05T14:01:13Z] INFO  [REQ-1001] Payment processed successfully — txn_id=TXN-88201
+[2026-04-05T14:02:30Z] INFO  [REQ-1002] POST /api/v2/checkout — user_id=7832, amount=$129.00
+[2026-04-05T14:02:31Z] INFO  [REQ-1002] Payment processed successfully — txn_id=TXN-88202
+[2026-04-05T14:05:44Z] INFO  [REQ-1003] POST /api/v2/checkout — user_id=3104, amount=$67.50
+[2026-04-05T14:05:45Z] INFO  [REQ-1003] Payment processed successfully — txn_id=TXN-88203
+[2026-04-05T14:10:15Z] WARNING [REQ-1004] Slow query detected: get_user_cart took 1.2s (threshold: 1.0s)
+[2026-04-05T14:12:00Z] INFO  [REQ-1005] POST /api/v2/checkout — user_id=9215, amount=$89.99
+[2026-04-05T14:12:01Z] INFO  [REQ-1005] Payment processed successfully — txn_id=TXN-88204
+[2026-04-05T14:15:22Z] ERROR ConnectionResetError: [Errno 104] Connection reset by peer
+  File "health_check.py", line 12, in check_health
+    response = requests.get(f"{LB_URL}/ping", timeout=2)
+[2026-04-05T14:18:33Z] INFO  [REQ-1006] POST /api/v2/checkout — user_id=6641, amount=$299.00
+[2026-04-05T14:18:34Z] INFO  [REQ-1006] Payment processed successfully — txn_id=TXN-88205
+[2026-04-05T14:20:01Z] INFO  Health check endpoint /health responding OK
+[2026-04-05T14:23:10Z] INFO  [REQ-1007] POST /api/v2/checkout — user_id=1188, amount=$549.99
+[2026-04-05T14:23:10Z] INFO  [REQ-1007] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T14:23:11Z] ERROR [REQ-1007] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T14:23:11Z] ERROR [REQ-1007] HTTP 500 returned to client
+[2026-04-05T14:25:00Z] INFO  [REQ-1008] POST /api/v2/checkout — user_id=4402, amount=$35.00
+[2026-04-05T14:25:01Z] INFO  [REQ-1008] Payment processed successfully — txn_id=TXN-88206
+[2026-04-05T14:28:15Z] ERROR ConnectionResetError: [Errno 104] Connection reset by peer
+  File "health_check.py", line 12, in check_health
+    response = requests.get(f"{LB_URL}/ping", timeout=2)
+[2026-04-05T14:30:44Z] INFO  [REQ-1009] POST /api/v2/checkout — user_id=2917, amount=$612.00
+[2026-04-05T14:30:44Z] INFO  [REQ-1009] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T14:30:45Z] ERROR [REQ-1009] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T14:30:45Z] ERROR [REQ-1009] HTTP 500 returned to client
+[2026-04-05T14:33:20Z] INFO  [REQ-1010] POST /api/v2/checkout — user_id=8054, amount=$77.25
+[2026-04-05T14:33:21Z] INFO  [REQ-1010] Payment processed successfully — txn_id=TXN-88207
+[2026-04-05T14:35:00Z] INFO  Health check endpoint /health responding OK
+[2026-04-05T14:38:12Z] WARNING [REQ-1011] Slow query detected: get_inventory took 1.5s (threshold: 1.0s)
+[2026-04-05T14:40:55Z] INFO  [REQ-1012] POST /api/v2/checkout — user_id=5530, amount=$720.00
+[2026-04-05T14:40:55Z] INFO  [REQ-1012] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T14:40:56Z] ERROR [REQ-1012] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T14:40:56Z] ERROR [REQ-1012] HTTP 500 returned to client
+[2026-04-05T14:42:10Z] INFO  [REQ-1013] POST /api/v2/checkout — user_id=3341, amount=$55.00
+[2026-04-05T14:42:11Z] INFO  [REQ-1013] Payment processed successfully — txn_id=TXN-88208
+[2026-04-05T14:45:00Z] ERROR ConnectionResetError: [Errno 104] Connection reset by peer
+  File "health_check.py", line 12, in check_health
+    response = requests.get(f"{LB_URL}/ping", timeout=2)
+[2026-04-05T14:48:33Z] INFO  [REQ-1014] POST /api/v2/checkout — user_id=7719, amount=$890.50
+[2026-04-05T14:48:33Z] INFO  [REQ-1014] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T14:48:34Z] ERROR [REQ-1014] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T14:48:34Z] ERROR [REQ-1014] HTTP 500 returned to client
+[2026-04-05T14:50:00Z] INFO  Health check endpoint /health responding OK
+[2026-04-05T14:52:15Z] INFO  [REQ-1015] POST /api/v2/checkout — user_id=1123, amount=$42.00
+[2026-04-05T14:52:16Z] INFO  [REQ-1015] Payment processed successfully — txn_id=TXN-88209
+[2026-04-05T14:55:40Z] INFO  [REQ-1016] POST /api/v2/checkout — user_id=6687, amount=$199.99
+[2026-04-05T14:55:41Z] INFO  [REQ-1016] Payment processed successfully — txn_id=TXN-88210
+[2026-04-05T14:58:22Z] WARNING Memory usage at 72% — approaching threshold (80%)
+[2026-04-05T15:00:00Z] INFO  Hourly metrics flush — active_sessions=342, avg_response_time=187ms
+[2026-04-05T15:02:45Z] INFO  [REQ-1017] POST /api/v2/checkout — user_id=9901, amount=$555.00
+[2026-04-05T15:02:45Z] INFO  [REQ-1017] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T15:02:46Z] ERROR [REQ-1017] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T15:02:46Z] ERROR [REQ-1017] HTTP 500 returned to client
+[2026-04-05T15:05:00Z] INFO  Health check endpoint /health responding OK
+[2026-04-05T15:08:30Z] INFO  [REQ-1018] POST /api/v2/checkout — user_id=2245, amount=$88.00
+[2026-04-05T15:08:31Z] INFO  [REQ-1018] Payment processed successfully — txn_id=TXN-88211
+[2026-04-05T15:10:15Z] ERROR ConnectionResetError: [Errno 104] Connection reset by peer
+  File "health_check.py", line 12, in check_health
+    response = requests.get(f"{LB_URL}/ping", timeout=2)
+[2026-04-05T15:12:50Z] INFO  [REQ-1019] POST /api/v2/checkout — user_id=4478, amount=$650.00
+[2026-04-05T15:12:50Z] INFO  [REQ-1019] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T15:12:51Z] ERROR [REQ-1019] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T15:12:51Z] ERROR [REQ-1019] HTTP 500 returned to client
+[2026-04-05T15:15:00Z] INFO  Health check endpoint /health responding OK
+[2026-04-05T15:18:22Z] INFO  [REQ-1020] POST /api/v2/checkout — user_id=8890, amount=$33.50
+[2026-04-05T15:18:23Z] INFO  [REQ-1020] Payment processed successfully — txn_id=TXN-88212
+[2026-04-05T15:20:00Z] WARNING Disk usage at 65% on /var/log partition
+[2026-04-05T15:22:14Z] INFO  [REQ-1021] POST /api/v2/checkout — user_id=5567, amount=$510.00
+[2026-04-05T15:22:14Z] INFO  [REQ-1021] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T15:22:15Z] ERROR [REQ-1021] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T15:22:15Z] ERROR [REQ-1021] HTTP 500 returned to client
+[2026-04-05T15:25:30Z] INFO  [REQ-1022] POST /api/v2/checkout — user_id=1290, amount=$112.00
+[2026-04-05T15:25:31Z] INFO  [REQ-1022] Payment processed successfully — txn_id=TXN-88213
+[2026-04-05T15:28:44Z] INFO  [REQ-1023] POST /api/v2/checkout — user_id=6012, amount=$780.00
+[2026-04-05T15:28:44Z] INFO  [REQ-1023] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T15:28:45Z] ERROR [REQ-1023] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T15:28:45Z] ERROR [REQ-1023] HTTP 500 returned to client
+[2026-04-05T15:30:00Z] INFO  Health check endpoint /health responding OK
+[2026-04-05T15:32:18Z] INFO  [REQ-1024] POST /api/v2/checkout — user_id=3378, amount=$24.99
+[2026-04-05T15:32:19Z] INFO  [REQ-1024] Payment processed successfully — txn_id=TXN-88214
+[2026-04-05T15:35:10Z] WARNING [REQ-1025] Slow query detected: get_payment_methods took 1.1s (threshold: 1.0s)
+[2026-04-05T15:37:55Z] INFO  [REQ-1026] POST /api/v2/checkout — user_id=9434, amount=$920.00
+[2026-04-05T15:37:55Z] INFO  [REQ-1026] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T15:37:56Z] ERROR [REQ-1026] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T15:37:56Z] ERROR [REQ-1026] HTTP 500 returned to client
+[2026-04-05T15:40:00Z] INFO  Health check endpoint /health responding OK
+[2026-04-05T15:42:30Z] INFO  [REQ-1027] POST /api/v2/checkout — user_id=2101, amount=$63.00
+[2026-04-05T15:42:31Z] INFO  [REQ-1027] Payment processed successfully — txn_id=TXN-88215
+[2026-04-05T15:45:00Z] ERROR ConnectionResetError: [Errno 104] Connection reset by peer
+  File "health_check.py", line 12, in check_health
+    response = requests.get(f"{LB_URL}/ping", timeout=2)
+[2026-04-05T15:48:12Z] INFO  [REQ-1028] POST /api/v2/checkout — user_id=7756, amount=$575.00
+[2026-04-05T15:48:12Z] INFO  [REQ-1028] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T15:48:13Z] ERROR [REQ-1028] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T15:48:13Z] ERROR [REQ-1028] HTTP 500 returned to client
+[2026-04-05T15:50:00Z] INFO  Health check endpoint /health responding OK
+[2026-04-05T15:52:45Z] INFO  [REQ-1029] POST /api/v2/checkout — user_id=4890, amount=$95.00
+[2026-04-05T15:52:46Z] INFO  [REQ-1029] Payment processed successfully — txn_id=TXN-88216
+[2026-04-05T15:55:30Z] INFO  [REQ-1030] POST /api/v2/checkout — user_id=1567, amount=$158.00
+[2026-04-05T15:55:31Z] INFO  [REQ-1030] Payment processed successfully — txn_id=TXN-88217
+[2026-04-05T15:58:00Z] WARNING CPU usage spike to 78% — likely due to fraud check batch processing
+[2026-04-05T16:00:00Z] INFO  Hourly metrics flush — active_sessions=389, avg_response_time=203ms
+[2026-04-05T16:02:20Z] INFO  [REQ-1031] POST /api/v2/checkout — user_id=8234, amount=$1250.00
+[2026-04-05T16:02:20Z] INFO  [REQ-1031] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T16:02:21Z] ERROR [REQ-1031] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T16:02:21Z] ERROR [REQ-1031] HTTP 500 returned to client
+[2026-04-05T16:05:00Z] INFO  Health check endpoint /health responding OK
+[2026-04-05T16:08:15Z] INFO  [REQ-1032] POST /api/v2/checkout — user_id=3456, amount=$47.50
+[2026-04-05T16:08:16Z] INFO  [REQ-1032] Payment processed successfully — txn_id=TXN-88218
+[2026-04-05T16:10:40Z] INFO  [REQ-1033] POST /api/v2/checkout — user_id=9012, amount=$680.00
+[2026-04-05T16:10:40Z] INFO  [REQ-1033] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T16:10:41Z] ERROR [REQ-1033] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T16:10:41Z] ERROR [REQ-1033] HTTP 500 returned to client
+[2026-04-05T16:13:00Z] INFO  [REQ-1034] POST /api/v2/checkout — user_id=5678, amount=$82.00
+[2026-04-05T16:13:01Z] INFO  [REQ-1034] Payment processed successfully — txn_id=TXN-88219
+[2026-04-05T16:15:22Z] ERROR ConnectionResetError: [Errno 104] Connection reset by peer
+  File "health_check.py", line 12, in check_health
+    response = requests.get(f"{LB_URL}/ping", timeout=2)
+[2026-04-05T16:18:30Z] INFO  [REQ-1035] POST /api/v2/checkout — user_id=2345, amount=$505.00
+[2026-04-05T16:18:30Z] INFO  [REQ-1035] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T16:18:31Z] ERROR [REQ-1035] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T16:18:31Z] ERROR [REQ-1035] HTTP 500 returned to client
+[2026-04-05T16:20:00Z] INFO  Health check endpoint /health responding OK
+[2026-04-05T16:22:45Z] INFO  [REQ-1036] POST /api/v2/checkout — user_id=7890, amount=$29.99
+[2026-04-05T16:22:46Z] INFO  [REQ-1036] Payment processed successfully — txn_id=TXN-88220
+[2026-04-05T16:25:10Z] WARNING [REQ-1037] Slow query detected: validate_coupon took 2.1s (threshold: 1.0s)
+[2026-04-05T16:27:55Z] INFO  [REQ-1038] POST /api/v2/checkout — user_id=4567, amount=$830.00
+[2026-04-05T16:27:55Z] INFO  [REQ-1038] Fraud check triggered — amount exceeds $500 threshold
+[2026-04-05T16:27:56Z] ERROR [REQ-1038] Unhandled exception in payment processing
+Traceback (most recent call last):
+  File "app.py", line 42, in handle_checkout
+    result = payment_service.process_payment(order)
+  File "payment_service.py", line 78, in process_payment
+    gateway_response = self.gateway.charge(payment_request)
+  File "payment_service.py", line 84, in process_payment
+    txn_id = gateway_response.transaction_id
+AttributeError: 'NoneType' object has no attribute 'transaction_id'
+[2026-04-05T16:27:56Z] ERROR [REQ-1038] HTTP 500 returned to client
+[2026-04-05T16:30:00Z] INFO  Health check endpoint /health responding OK
+[2026-04-05T16:32:18Z] INFO  [REQ-1039] POST /api/v2/checkout — user_id=1234, amount=$156.00
+[2026-04-05T16:32:19Z] INFO  [REQ-1039] Payment processed successfully — txn_id=TXN-88221
+[2026-04-05T16:35:40Z] INFO  [REQ-1040] POST /api/v2/checkout — user_id=8901, amount=$44.00
+[2026-04-05T16:35:41Z] INFO  [REQ-1040] Payment processed successfully — txn_id=TXN-88222
