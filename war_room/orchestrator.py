@@ -197,7 +197,7 @@ class WarRoomOrchestrator:
         # Build rationale from all agents
         rationale = self._build_rationale()
 
-        return {
+        final_dict = {
             "task": "Assessment 1 — War Room Decision",
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "decision": decision,
@@ -209,8 +209,13 @@ class WarRoomOrchestrator:
             "metric_snapshot": metric_snapshot,
             "risk_register": risk_register,
             "action_plan": action_plan,
-            "communication_plan": comm_plan,
-            "agent_outputs": {
+            "communication_plan": comm_plan
+        }
+        
+        # Include full agent outputs only if verbose mode is enabled
+        from config.settings import settings
+        if getattr(settings, "VERBOSE_JSON_OUTPUT", False):
+            final_dict["agent_outputs"] = {
                 "data_analyst": analyst_out,
                 "marketing": marketing_out,
                 "product_manager": pm_out,
@@ -218,7 +223,8 @@ class WarRoomOrchestrator:
                 "growth": self.state.get("growth", {}),
                 "risk": risk_out,
             }
-        }
+            
+        return final_dict
 
     def _normalize_recommendation(self, rec: str) -> str:
         """Normalize varied recommendation strings to one of three options."""
@@ -284,14 +290,16 @@ class WarRoomOrchestrator:
 
         if score > 0.7:
             return (f"High confidence ({score}) in {decision}. "
-                    f"Metrics health score is {health}, indicating manageable risk.")
+                    f"Metrics health score is {health}, indicating manageable risk. "
+                    f"Confidence would increase further with 7-day stability data.")
         elif score > 0.4:
             return (f"Moderate confidence ({score}) in {decision}. "
                     f"Metrics health at {health} with mixed signals across agents. "
-                    f"Confidence would increase with A/B test data and confirmed root cause.")
+                    f"Confidence would increase with A/B test data and confirmed root cause analysis.")
         else:
             return (f"Low confidence ({score}) in {decision} — situation is critical. "
-                    f"Health score at {health}. Immediate action recommended.")
+                    f"Health score at {health}. Immediate action recommended. "
+                    f"Confidence in recovery would increase with a confirmed bug fix and stable rollback metrics.")
 
     def _build_rationale(self) -> str:
         """Build a concise rationale from all agent outputs."""
@@ -329,9 +337,9 @@ class WarRoomOrchestrator:
                 {"action": "Verify legacy checkout flow is handling all traffic",
                  "owner": "SRE Team", "timeframe": "2 hours"},
                 {"action": "Publish customer-facing status update",
-                 "owner": "Marketing", "timeframe": "1 hour"},
+                 "owner": "Marketing", "timeframe": "4 hours"},
                 {"action": "Publish internal post-incident report",
-                 "owner": "PM", "timeframe": "24 hours"},
+                 "owner": "PM", "timeframe": "24-48 hours"},
             ]
         elif decision == "Pause":
             return [
@@ -340,20 +348,20 @@ class WarRoomOrchestrator:
                 {"action": "Isolate payment service — roll back to stable version",
                  "owner": "Backend Team", "timeframe": "2 hours"},
                 {"action": "Publish internal incident report",
-                 "owner": "PM", "timeframe": "4 hours"},
+                 "owner": "PM", "timeframe": "24 hours"},
                 {"action": "Draft and schedule customer-facing status update",
-                 "owner": "Marketing", "timeframe": "2 hours"},
+                 "owner": "Marketing", "timeframe": "4 hours"},
                 {"action": "Set up 30-min war room sync for re-evaluation",
-                 "owner": "PM", "timeframe": "6 hours"},
+                 "owner": "PM", "timeframe": "48 hours"},
             ]
         else:  # Proceed
             return [
                 {"action": "Continue gradual rollout to next traffic segment",
-                 "owner": "Engineering Lead", "timeframe": "Next 24 hours"},
+                 "owner": "Engineering Lead", "timeframe": "Next 24-48 hours"},
                 {"action": "Monitor error rate and latency dashboards closely",
                  "owner": "SRE Team", "timeframe": "Ongoing"},
                 {"action": "Prepare rollback plan in case metrics deteriorate",
-                 "owner": "Backend Team", "timeframe": "Standby"},
+                 "owner": "Backend Team", "timeframe": "24 hours"},
             ]
 
     def _fallback_output(self, agent_name: str) -> dict:

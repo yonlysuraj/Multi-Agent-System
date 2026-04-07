@@ -104,7 +104,14 @@ You MUST respond with ONLY a valid JSON object in this exact format:
   "explanation": "<why this script reproduces the bug>"
 }
 
-IMPORTANT: The repro_script must add the mini_repo path to sys.path and import from app.py. Use os.path to construct the path relative to the script location."""
+IMPORTANT: Use the following exact code to set up the path to mini_repo:
+import sys
+import os
+from pathlib import Path
+project_root = Path(__file__).resolve().parents[1]
+mini_repo = project_root / "bug_triage" / "data" / "mini_repo"
+sys.path.insert(0, str(mini_repo))
+"""
 
 REPRODUCTION_USER = """Write a minimal reproduction script for this bug:
 

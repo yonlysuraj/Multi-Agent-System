@@ -171,11 +171,12 @@ class A2Orchestrator:
                 "concerns": critic.get("concerns", []),
                 "suggested_edge_cases": critic.get("suggested_edge_cases", []),
                 "open_questions": critic.get("open_questions", [])
-            },
-
-            # Full agent outputs for traceability
-            "agent_outputs": self.agent_outputs
+            }
         }
+        
+        # Include full agent outputs only if verbose mode is enabled
+        if getattr(settings, "VERBOSE_JSON_OUTPUT", False):
+            final["agent_outputs"] = self.agent_outputs
 
         self.state["final_diagnosis"] = final
 

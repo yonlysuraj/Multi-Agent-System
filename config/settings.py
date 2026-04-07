@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     GROQ_MODEL: str = "llama-3.3-70b-versatile"
     LOG_LEVEL: str = "INFO"
     OUTPUT_DIR: str = "./outputs"
+    VERBOSE_JSON_OUTPUT: bool = False
 
     class Config:
         env_file = ".env"
