@@ -1,0 +1,16 @@
+.env
+venv/
+__pycache__/
+*.pyc
+*.pyo
+outputs/
+.idea/
+.vscode/
+*.egg-info/
+dist/
+build/
+.DS_Store
+
+# Temporary guide folders for implementation
+war_room_guide/
+bug_triage_guide/
