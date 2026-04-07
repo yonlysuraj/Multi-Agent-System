@@ -9,28 +9,109 @@ This repository implements two complex enterprise capabilities utilizing special
 
 The system embraces a **shared-tool, specialized-agent** architecture. The heavy lifting (statistical analysis, regex parsing, file operations) is done purely in python to keep token counts low and latency blazing fast, while the LLM acts as the orchestrating reasoning engine.
 
-```text
-┌─────────────────────────────────────────────────────────┐
-│                     ENTRY POINT                         │
-│                     main.py / CLI                       │
-└────────────────────────┬────────────────────────────────┘
-                         │
-             ┌───────────▼───────────┐
-             │     ORCHESTRATOR      │  ← State machine controller
-             │  orchestrator.py      │  ← Drives agent pipeline
-             └───┬───┬───┬───┬───┬──┘
-                 │   │   │   │   │
-         ┌───────┘   │   │   │   └────────┐
-         ▼           ▼   ▼   ▼            ▼
-      Agent 1    Agent 2  ...          Agent N
-     (LLM call) (LLM call)           (LLM call)
-         │           │                    │
-         └──────┬────┴────────────────────┘
-                │
-         ┌──────▼──────┐
-         │    TOOLS    │  ← Pure Python functions (no LLM)
-         │  tools/     │  ← Called BY agents programmatically
-         └─────────────┘
+```mermaid
+graph TD
+    %% ─── USERS / CLI ───
+    User(("🧑‍💻 User"))
+    CLI["💻 main.py CLI\n(Task Runner)"]
+    
+    User -->|python main.py| CLI
+
+    %% ─── SHARED INFRASTRUCTURE ───
+    subgraph Core["⚙️ Shared Infrastructure Layer\n(shared/)"]
+        LLM["🧠 LLM Inference Client\n(Llama-3-70b)"]
+        TraceLogger["📝 Telemetry Logger\n(@trace_agent)"]
+        Models["🛡️ TypedDict Models\n(Data Validation)"]
+    end
+
+    %% ─── TOOLS ───
+    subgraph NativeTools["🛠️ Native Python Tools\n(tools/)"]
+        MetricsTool["📈 Metrics Analysis\n(numpy, scipy)"]
+        FeedbackTool["💬 Feedback Processing\n(TextBlob)"]
+        LogTool["📜 Log Pattern extraction\n(Regex)"]
+        ExecTool["⚡ Python Execution\n(Subprocess/Sandbox)"]
+    end
+
+    CLI -.-> Core
+    Core -.-> NativeTools
+
+    %% ─── ASSESSMENT 1: WAR ROOM ───
+    subgraph A1["⚔️ Assessment 1: War Room Pipeline"]
+        A1_Orch{"🔄 War Room\nOrchestrator"}
+        
+        A1_A1["Data Analyst Agent"]
+        A1_A2["Marketing Agent"]
+        A1_A3["Product Manager Agent"]
+        A1_A4["Finance Agent"]
+        A1_A5["Growth Agent"]
+        A1_A6["Risk/Critic Agent"]
+
+        A1_Orch -->|Stage 1| A1_A1
+        A1_Orch -->|Stage 2| A1_A2
+        A1_Orch -->|Stage 3| A1_A3
+        A1_Orch -->|Stage 4| A1_A4
+        A1_Orch -->|Stage 5| A1_A5
+        A1_Orch -->|Stage 6| A1_A6
+        
+        %% Tool Connections
+        A1_A1 -.-> MetricsTool
+        A1_A4 -.-> MetricsTool
+        A1_A5 -.-> MetricsTool
+        A1_A6 -.-> MetricsTool
+        A1_A2 -.-> FeedbackTool
+    end
+
+    %% ─── ASSESSMENT 2: BUG TRIAGE ───
+    subgraph A2["🐛 Assessment 2: Bug Triage Pipeline"]
+        A2_Orch{"🔄 Bug Triage\nOrchestrator"}
+        
+        A2_A1["Triage Agent"]
+        A2_A2["Log Analyst Agent"]
+        A2_A3["Reproduction Agent\n(Dynamic Code)"]
+        A2_A4["Fix Planner Agent"]
+        A2_A5["Critic Agent"]
+
+        A2_Orch -->|Stage 1| A2_A1
+        A2_Orch -->|Stage 2| A2_A2
+        A2_Orch -->|Stage 3| A2_A3
+        A2_Orch -->|Stage 4| A2_A4
+        A2_Orch -->|Stage 5| A2_A5
+        
+        %% Tool connections
+        A2_A2 -.-> LogTool
+        A2_A3 -.-> ExecTool
+    end
+
+    CLI -->|--task a1| A1_Orch
+    CLI -->|--task a2| A2_Orch
+    
+    A1_Orch -.-> LLM
+    A2_Orch -.-> LLM
+
+    %% ─── OUTPUTS ───
+    subgraph Outputs["📁 System Outputs\n(outputs/)"]
+        A1_Out["📄 a1_decision.json"]
+        A2_Out["📄 a2_diagnosis.json"]
+        Repro_Script["🐍 a2_repro_test.py"]
+        TraceLog["📓 trace.log\n(Milliseconds precise)"]
+    end
+
+    A1_Orch ===>|Aggregates Decision| A1_Out
+    A2_Orch ===>|Aggregates Diagnosis| A2_Out
+    A2_A3 ===>|Writes & Executes| Repro_Script
+    TraceLogger ===>|Appends| TraceLog
+
+    classDef orch fill:#2b2d42,stroke:#8d99ae,stroke-width:2px,color:#fff;
+    classDef agent fill:#8d99ae,stroke:#2b2d42,color:#fff;
+    classDef output fill:#ef233c,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef tools fill:#118ab2,stroke:#073b4c,color:#fff;
+    classDef core fill:#06d6a0,stroke:#073b4c,color:#000;
+
+    class A1_Orch,A2_Orch orch;
+    class A1_A1,A1_A2,A1_A3,A1_A4,A1_A5,A1_A6,A2_A1,A2_A2,A2_A3,A2_A4,A2_A5 agent;
+    class A1_Out,A2_Out,Repro_Script,TraceLog output;
+    class MetricsTool,FeedbackTool,LogTool,ExecTool tools;
+    class LLM,TraceLogger,Models core;
 ```
 
 ---
