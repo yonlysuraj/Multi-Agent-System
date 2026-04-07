@@ -3,7 +3,7 @@ from shared.groq_client import call_llm
 from shared.utils import parse_json_from_llm
 from shared.logger import trace_agent
 from config.prompts.a1_prompts import PM_SYSTEM, PM_USER
-from tools.metrics_tools import trend_compare
+
 
 
 class PMAgent:

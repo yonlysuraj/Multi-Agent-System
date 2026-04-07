@@ -3,7 +3,7 @@ venv/
 __pycache__/
 *.pyc
 *.pyo
-outputs/
+# outputs/  # Committed so evaluators can see pre-generated results
 .idea/
 .vscode/
 *.egg-info/
