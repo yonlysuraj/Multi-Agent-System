@@ -3,6 +3,8 @@ Structured trace logger with rich console output and file logging.
 Format: [TIMESTAMP] [TASK] [STAGE N] [AgentName] EVENT
 """
 
+import sys
+import os
 import time
 import functools
 from datetime import datetime, timezone
@@ -10,7 +12,16 @@ from pathlib import Path
 from rich.console import Console
 from config.settings import settings
 
-console = Console()
+# Force UTF-8 stdout on Windows
+if sys.platform == "win32":
+    os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+    if hasattr(sys.stdout, "reconfigure"):
+        try:
+            sys.stdout.reconfigure(encoding="utf-8")
+        except Exception:
+            pass
+
+console = Console(force_terminal=True)
 _log_file_path = Path(settings.OUTPUT_DIR) / "trace.log"
 
 # Current task context (set by orchestrator)
