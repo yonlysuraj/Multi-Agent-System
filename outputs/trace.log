@@ -232,3 +232,284 @@
 [2026-04-07 20:38:16] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1764
 [2026-04-07 20:38:16] [A2] [LLM]     groq.chat() → tokens_out=473, latency=10.7s
 [2026-04-07 20:38:16] [A2] [STAGE 5] [Critic] END — took 10.7s
+[2026-04-08 15:00:13] [A2] [STAGE 1] [Triage] START
+[2026-04-08 15:00:16] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=751
+[2026-04-08 15:00:16] [A2] [LLM]     groq.chat() → tokens_out=465, latency=2.7s
+[2026-04-08 15:00:16] [A2] [STAGE 1] [Triage] END — took 3.1s
+[2026-04-08 15:00:16] [A2] [STAGE 2] [LogAnalyst] START
+[2026-04-08 15:00:16] [A2] [TOOL]    parse_logs() called — 17753 chars
+[2026-04-08 15:00:16] [A2] [TOOL]    parse_logs() → total=254, errors=34, warns=7
+[2026-04-08 15:00:16] [A2] [TOOL]    extract_stack_traces() called — 17753 chars
+[2026-04-08 15:00:16] [A2] [TOOL]    extract_stack_traces() → found 14 stack traces
+[2026-04-08 15:00:16] [A2] [TOOL]    search_log_pattern() called — pattern='AttributeError'
+[2026-04-08 15:00:16] [A2] [TOOL]    search_log_pattern() → 14 matches
+[2026-04-08 15:00:16] [A2] [TOOL]    search_log_pattern() called — pattern='payment_service.py'
+[2026-04-08 15:00:16] [A2] [TOOL]    search_log_pattern() → 28 matches
+[2026-04-08 15:00:16] [A2] [TOOL]    search_log_pattern() called — pattern='fraud-check middleware'
+[2026-04-08 15:00:16] [A2] [TOOL]    search_log_pattern() → 0 matches
+[2026-04-08 15:00:16] [A2] [TOOL]    search_log_pattern() called — pattern='StripeConnect v4.2'
+[2026-04-08 15:00:16] [A2] [TOOL]    search_log_pattern() → 1 matches
+[2026-04-08 15:00:16] [A2] [TOOL]    search_log_pattern() called — pattern='HTTP 500 error'
+[2026-04-08 15:00:16] [A2] [TOOL]    search_log_pattern() → 0 matches
+[2026-04-08 15:00:17] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=4033
+[2026-04-08 15:00:17] [A2] [LLM]     groq.chat() → tokens_out=281, latency=1.4s
+[2026-04-08 15:00:17] [A2] [STAGE 2] [LogAnalyst] END — took 1.4s
+[2026-04-08 15:00:17] [A2] [STAGE 3] [Reproduction] START
+[2026-04-08 15:00:19] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1179
+[2026-04-08 15:00:19] [A2] [LLM]     groq.chat() → tokens_out=290, latency=2.2s
+[2026-04-08 15:00:19] [A2] [STAGE 3] [INFO] Script extraction: Strategy 1 succeeded (code block + JSON block)
+[2026-04-08 15:00:19] [A2] [STAGE 3] [INFO] Script source: llm-generated (code-block format)
+[2026-04-08 15:00:19] [A2] [TOOL]    write_temp_file() called — source=llm-generated (code-block format), has_script=True
+[2026-04-08 15:00:19] [A2] [TOOL]    write_temp_file() called — filename=a2_repro_test.py
+[2026-04-08 15:00:19] [A2] [TOOL]    write_temp_file() → saved to ./outputs\a2_repro_test.py
+[2026-04-08 15:00:19] [A2] [TOOL]    write_temp_file() → saved to ./outputs\a2_repro_test.py
+[2026-04-08 15:00:19] [A2] [TOOL]    run_python_script() called — path=./outputs\a2_repro_test.py, timeout=30s
+[2026-04-08 15:00:19] [A2] [TOOL]    run_python_script() → exit_code=1, timed_out=False
+[2026-04-08 15:00:19] [A2] [STAGE 3] [INFO] Execution result: exit_code=1, reproduced=False
+[2026-04-08 15:00:19] [A2] [STAGE 3] [Reproduction] END — took 2.4s
+[2026-04-08 15:00:19] [A2] [STAGE 4] [FixPlanner] START
+[2026-04-08 15:00:30] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1351
+[2026-04-08 15:00:30] [A2] [LLM]     groq.chat() → tokens_out=439, latency=10.2s
+[2026-04-08 15:00:30] [A2] [STAGE 4] [FixPlanner] END — took 10.2s
+[2026-04-08 15:00:30] [A2] [STAGE 5] [Critic] START
+[2026-04-08 15:00:42] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1776
+[2026-04-08 15:00:42] [A2] [LLM]     groq.chat() → tokens_out=589, latency=12.3s
+[2026-04-08 15:00:42] [A2] [STAGE 5] [Critic] END — took 12.3s
+[2026-04-08 15:07:05] [A2] [STAGE 1] [Triage] START
+[2026-04-08 15:07:07] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=751
+[2026-04-08 15:07:07] [A2] [LLM]     groq.chat() → tokens_out=446, latency=1.9s
+[2026-04-08 15:07:07] [A2] [STAGE 1] [Triage] END — took 2.3s
+[2026-04-08 15:07:07] [A2] [STAGE 2] [LogAnalyst] START
+[2026-04-08 15:07:07] [A2] [TOOL]    parse_logs() called — 17753 chars
+[2026-04-08 15:07:07] [A2] [TOOL]    parse_logs() → total=254, errors=34, warns=7
+[2026-04-08 15:07:07] [A2] [TOOL]    extract_stack_traces() called — 17753 chars
+[2026-04-08 15:07:07] [A2] [TOOL]    extract_stack_traces() → found 14 stack traces
+[2026-04-08 15:07:07] [A2] [TOOL]    search_log_pattern() called — pattern='AttributeError'
+[2026-04-08 15:07:07] [A2] [TOOL]    search_log_pattern() → 14 matches
+[2026-04-08 15:07:07] [A2] [TOOL]    search_log_pattern() called — pattern='payment_service.py'
+[2026-04-08 15:07:07] [A2] [TOOL]    search_log_pattern() → 28 matches
+[2026-04-08 15:07:07] [A2] [TOOL]    search_log_pattern() called — pattern='fraud-check middleware'
+[2026-04-08 15:07:07] [A2] [TOOL]    search_log_pattern() → 0 matches
+[2026-04-08 15:07:07] [A2] [TOOL]    search_log_pattern() called — pattern='StripeConnect v4.2'
+[2026-04-08 15:07:07] [A2] [TOOL]    search_log_pattern() → 1 matches
+[2026-04-08 15:07:07] [A2] [TOOL]    search_log_pattern() called — pattern='HTTP 500 error'
+[2026-04-08 15:07:07] [A2] [TOOL]    search_log_pattern() → 0 matches
+[2026-04-08 15:07:08] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=4014
+[2026-04-08 15:07:08] [A2] [LLM]     groq.chat() → tokens_out=330, latency=1.6s
+[2026-04-08 15:07:08] [A2] [STAGE 2] [LogAnalyst] END — took 1.6s
+[2026-04-08 15:07:08] [A2] [STAGE 3] [Reproduction] START
+[2026-04-08 15:07:09] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1308
+[2026-04-08 15:07:09] [A2] [LLM]     groq.chat() → tokens_out=206, latency=0.6s
+[2026-04-08 15:07:09] [A2] [STAGE 3] [INFO] Script extraction: Strategy 1 succeeded (code block + JSON block)
+[2026-04-08 15:07:09] [A2] [STAGE 3] [INFO] Script source: llm-generated (code-block format)
+[2026-04-08 15:07:09] [A2] [TOOL]    write_temp_file() called — source=llm-generated (code-block format), has_script=True
+[2026-04-08 15:07:09] [A2] [TOOL]    write_temp_file() called — filename=a2_repro_test.py
+[2026-04-08 15:07:09] [A2] [TOOL]    write_temp_file() → saved to ./outputs\a2_repro_test.py
+[2026-04-08 15:07:09] [A2] [TOOL]    write_temp_file() → saved to ./outputs\a2_repro_test.py
+[2026-04-08 15:07:09] [A2] [TOOL]    run_python_script() called — path=./outputs\a2_repro_test.py, timeout=30s
+[2026-04-08 15:07:09] [A2] [TOOL]    run_python_script() → exit_code=1, timed_out=False
+[2026-04-08 15:07:09] [A2] [STAGE 3] [INFO] Execution result: exit_code=1, reproduced=True
+[2026-04-08 15:07:09] [A2] [STAGE 3] [Reproduction] END — took 0.7s
+[2026-04-08 15:07:09] [A2] [STAGE 4] [FixPlanner] START
+[2026-04-08 15:07:13] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1533
+[2026-04-08 15:07:13] [A2] [LLM]     groq.chat() → tokens_out=351, latency=3.4s
+[2026-04-08 15:07:13] [A2] [STAGE 4] [FixPlanner] END — took 3.4s
+[2026-04-08 15:07:13] [A2] [STAGE 5] [Critic] START
+[2026-04-08 15:07:33] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1870
+[2026-04-08 15:07:33] [A2] [LLM]     groq.chat() → tokens_out=494, latency=19.9s
+[2026-04-08 15:07:33] [A2] [STAGE 5] [Critic] END — took 19.9s
+[2026-04-08 15:10:28] [A1] [STAGE 0] [INFO] Entering stage: LOAD_DATA
+[2026-04-08 15:10:28] [A1] [STAGE 0] [INFO] Loaded 8 metrics, 30 feedback items
+[2026-04-08 15:10:28] [A1] [STAGE 1] [INFO] Entering stage: DATA_ANALYST
+[2026-04-08 15:10:28] [A1] [STAGE 1] [DataAnalyst] START
+[2026-04-08 15:10:28] [A1] [TOOL]    analyze_metrics() called — 8 metrics, launch_day=7
+[2026-04-08 15:10:28] [A1] [TOOL]    analyze_metrics() → analyzed 8 metrics
+[2026-04-08 15:10:28] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=2.0
+[2026-04-08 15:10:28] [A1] [TOOL]    detect_anomalies() → anomaly=No, indices=[]
+[2026-04-08 15:10:28] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=2.0
+[2026-04-08 15:10:28] [A1] [TOOL]    detect_anomalies() → anomaly=No, indices=[]
+[2026-04-08 15:10:28] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=2.0
+[2026-04-08 15:10:28] [A1] [TOOL]    detect_anomalies() → anomaly=No, indices=[]
+[2026-04-08 15:10:30] [A1] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1070
+[2026-04-08 15:10:30] [A1] [LLM]     groq.chat() → tokens_out=410, latency=1.6s
+[2026-04-08 15:10:30] [A1] [STAGE 1] [DataAnalyst] END — took 2.0s
+[2026-04-08 15:10:30] [A1] [STAGE 2] [INFO] Entering stage: MARKETING
+[2026-04-08 15:10:30] [A1] [STAGE 2] [MarketingComms] START
+[2026-04-08 15:10:30] [A1] [TOOL]    sentiment_analysis() called — 30 items
+[2026-04-08 15:10:31] [A1] [TOOL]    sentiment_analysis() → mean=0.075, pos=14, neg=6
+[2026-04-08 15:10:31] [A1] [TOOL]    cluster_themes() called — 30 items
+[2026-04-08 15:10:31] [A1] [TOOL]    cluster_themes() → 5 themes found
+[2026-04-08 15:10:31] [A1] [TOOL]    summarize_feedback() called — 30 items, top_n=5
+[2026-04-08 15:10:31] [A1] [TOOL]    summarize_feedback() → top phrases: ['app', 'checkout', 'payment', 'update', 'new']
+[2026-04-08 15:10:32] [A1] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1666
+[2026-04-08 15:10:32] [A1] [LLM]     groq.chat() → tokens_out=287, latency=1.5s
+[2026-04-08 15:10:32] [A1] [STAGE 2] [MarketingComms] END — took 1.5s
+[2026-04-08 15:10:32] [A1] [STAGE 3] [INFO] Entering stage: PM
+[2026-04-08 15:10:32] [A1] [STAGE 3] [ProductManager] START
+[2026-04-08 15:10:34] [A1] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1368
+[2026-04-08 15:10:34] [A1] [LLM]     groq.chat() → tokens_out=286, latency=2.4s
+[2026-04-08 15:10:34] [A1] [STAGE 3] [ProductManager] END — took 2.4s
+[2026-04-08 15:10:34] [A1] [STAGE 4] [INFO] Entering stage: FINANCE
+[2026-04-08 15:10:34] [A1] [STAGE 4] [Finance] START
+[2026-04-08 15:10:34] [A1] [TOOL]    analyze_metrics() called — 3 metrics, launch_day=7
+[2026-04-08 15:10:34] [A1] [TOOL]    analyze_metrics() → analyzed 3 metrics
+[2026-04-08 15:10:37] [A1] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=396
+[2026-04-08 15:10:37] [A1] [LLM]     groq.chat() → tokens_out=349, latency=2.1s
+[2026-04-08 15:10:37] [A1] [STAGE 4] [Finance] END — took 2.1s
+[2026-04-08 15:10:37] [A1] [STAGE 5] [INFO] Entering stage: GROWTH
+[2026-04-08 15:10:37] [A1] [STAGE 5] [Growth] START
+[2026-04-08 15:10:37] [A1] [TOOL]    analyze_metrics() called — 4 metrics, launch_day=7
+[2026-04-08 15:10:37] [A1] [TOOL]    analyze_metrics() → analyzed 4 metrics
+[2026-04-08 15:10:37] [A1] [TOOL]    trend_compare() called — comparing against 1 thresholds
+[2026-04-08 15:10:37] [A1] [TOOL]    trend_compare() → 1/1 passed
+[2026-04-08 15:10:37] [A1] [TOOL]    trend_compare() called — comparing against 1 thresholds
+[2026-04-08 15:10:37] [A1] [TOOL]    trend_compare() → 1/1 passed
+[2026-04-08 15:10:37] [A1] [TOOL]    trend_compare() called — comparing against 1 thresholds
+[2026-04-08 15:10:37] [A1] [TOOL]    trend_compare() → 1/1 passed
+[2026-04-08 15:10:37] [A1] [TOOL]    trend_compare() called — comparing against 1 thresholds
+[2026-04-08 15:10:37] [A1] [TOOL]    trend_compare() → 1/1 passed
+[2026-04-08 15:10:38] [A1] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=600
+[2026-04-08 15:10:38] [A1] [LLM]     groq.chat() → tokens_out=175, latency=1.2s
+[2026-04-08 15:10:38] [A1] [STAGE 5] [Growth] END — took 1.2s
+[2026-04-08 15:10:38] [A1] [STAGE 6] [INFO] Entering stage: RISK
+[2026-04-08 15:10:38] [A1] [STAGE 6] [RiskCritic] START
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[10]
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[4, 10]
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[10]
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[4, 10]
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[9]
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[9]
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[9]
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:10:38] [A1] [TOOL]    detect_anomalies() → anomaly=No, indices=[]
+[2026-04-08 15:10:40] [A1] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=2432
+[2026-04-08 15:10:40] [A1] [LLM]     groq.chat() → tokens_out=461, latency=2.3s
+[2026-04-08 15:10:40] [A1] [STAGE 6] [RiskCritic] END — took 2.3s
+[2026-04-08 15:10:40] [A1] [STAGE 7] [INFO] Entering stage: AGGREGATE
+[2026-04-08 15:10:40] [A1] [STAGE 7] [INFO] Final decision: Pause (confidence: 0.37)
+[2026-04-08 15:10:40] [A2] [STAGE 1] [Triage] START
+[2026-04-08 15:10:42] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=751
+[2026-04-08 15:10:42] [A2] [LLM]     groq.chat() → tokens_out=449, latency=1.8s
+[2026-04-08 15:10:42] [A2] [STAGE 1] [Triage] END — took 1.8s
+[2026-04-08 15:10:42] [A2] [STAGE 2] [LogAnalyst] START
+[2026-04-08 15:10:42] [A2] [TOOL]    parse_logs() called — 17753 chars
+[2026-04-08 15:10:42] [A2] [TOOL]    parse_logs() → total=254, errors=34, warns=7
+[2026-04-08 15:10:42] [A2] [TOOL]    extract_stack_traces() called — 17753 chars
+[2026-04-08 15:10:42] [A2] [TOOL]    extract_stack_traces() → found 14 stack traces
+[2026-04-08 15:10:42] [A2] [TOOL]    search_log_pattern() called — pattern='fraud-check middleware'
+[2026-04-08 15:10:42] [A2] [TOOL]    search_log_pattern() → 0 matches
+[2026-04-08 15:10:42] [A2] [TOOL]    search_log_pattern() called — pattern='payment_service.py'
+[2026-04-08 15:10:42] [A2] [TOOL]    search_log_pattern() → 28 matches
+[2026-04-08 15:10:42] [A2] [TOOL]    search_log_pattern() called — pattern='AttributeError'
+[2026-04-08 15:10:42] [A2] [TOOL]    search_log_pattern() → 14 matches
+[2026-04-08 15:10:42] [A2] [TOOL]    search_log_pattern() called — pattern='StripeConnect v4.2'
+[2026-04-08 15:10:42] [A2] [TOOL]    search_log_pattern() → 1 matches
+[2026-04-08 15:10:42] [A2] [TOOL]    search_log_pattern() called — pattern='HTTP 500 error'
+[2026-04-08 15:10:42] [A2] [TOOL]    search_log_pattern() → 0 matches
+[2026-04-08 15:10:58] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=4017
+[2026-04-08 15:10:58] [A2] [LLM]     groq.chat() → tokens_out=273, latency=15.6s
+[2026-04-08 15:10:58] [A2] [STAGE 2] [LogAnalyst] END — took 15.6s
+[2026-04-08 15:10:58] [A2] [STAGE 3] [Reproduction] START
+[2026-04-08 15:11:05] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1251
+[2026-04-08 15:11:05] [A2] [LLM]     groq.chat() → tokens_out=187, latency=7.2s
+[2026-04-08 15:11:05] [A2] [STAGE 3] [INFO] Script extraction: Strategy 1 succeeded (code block + JSON block)
+[2026-04-08 15:11:05] [A2] [STAGE 3] [INFO] Script source: llm-generated (code-block format)
+[2026-04-08 15:11:05] [A2] [TOOL]    write_temp_file() called — source=llm-generated (code-block format), has_script=True
+[2026-04-08 15:11:05] [A2] [TOOL]    write_temp_file() called — filename=a2_repro_test.py
+[2026-04-08 15:11:05] [A2] [TOOL]    write_temp_file() → saved to ./outputs\a2_repro_test.py
+[2026-04-08 15:11:05] [A2] [TOOL]    write_temp_file() → saved to ./outputs\a2_repro_test.py
+[2026-04-08 15:11:05] [A2] [TOOL]    run_python_script() called — path=./outputs\a2_repro_test.py, timeout=30s
+[2026-04-08 15:11:05] [A2] [TOOL]    run_python_script() → exit_code=1, timed_out=False
+[2026-04-08 15:11:05] [A2] [STAGE 3] [INFO] Execution result: exit_code=1, reproduced=True
+[2026-04-08 15:11:05] [A2] [STAGE 3] [Reproduction] END — took 7.4s
+[2026-04-08 15:11:05] [A2] [STAGE 4] [FixPlanner] START
+[2026-04-08 15:11:13] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1426
+[2026-04-08 15:11:13] [A2] [LLM]     groq.chat() → tokens_out=434, latency=7.8s
+[2026-04-08 15:11:13] [A2] [STAGE 4] [FixPlanner] END — took 7.8s
+[2026-04-08 15:11:13] [A2] [STAGE 5] [Critic] START
+[2026-04-08 15:11:25] [A2] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1847
+[2026-04-08 15:11:25] [A2] [LLM]     groq.chat() → tokens_out=478, latency=12.5s
+[2026-04-08 15:11:25] [A2] [STAGE 5] [Critic] END — took 12.5s
+[2026-04-08 15:15:54] [A1] [STAGE 0] [INFO] Entering stage: LOAD_DATA
+[2026-04-08 15:15:54] [A1] [STAGE 0] [INFO] Loaded 8 metrics, 30 feedback items
+[2026-04-08 15:15:54] [A1] [STAGE 1] [INFO] Entering stage: DATA_ANALYST
+[2026-04-08 15:15:54] [A1] [STAGE 1] [DataAnalyst] START
+[2026-04-08 15:15:54] [A1] [TOOL]    analyze_metrics() called — 8 metrics, launch_day=7
+[2026-04-08 15:15:54] [A1] [TOOL]    analyze_metrics() → analyzed 8 metrics
+[2026-04-08 15:15:54] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=2.0
+[2026-04-08 15:15:54] [A1] [TOOL]    detect_anomalies() → anomaly=No, indices=[]
+[2026-04-08 15:15:54] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=2.0
+[2026-04-08 15:15:54] [A1] [TOOL]    detect_anomalies() → anomaly=No, indices=[]
+[2026-04-08 15:15:54] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=2.0
+[2026-04-08 15:15:54] [A1] [TOOL]    detect_anomalies() → anomaly=No, indices=[]
+[2026-04-08 15:15:56] [A1] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1070
+[2026-04-08 15:15:56] [A1] [LLM]     groq.chat() → tokens_out=416, latency=1.4s
+[2026-04-08 15:15:56] [A1] [STAGE 1] [DataAnalyst] END — took 1.8s
+[2026-04-08 15:15:56] [A1] [STAGE 2] [INFO] Entering stage: MARKETING
+[2026-04-08 15:15:56] [A1] [STAGE 2] [MarketingComms] START
+[2026-04-08 15:15:56] [A1] [TOOL]    sentiment_analysis() called — 30 items
+[2026-04-08 15:15:56] [A1] [TOOL]    sentiment_analysis() → mean=0.075, pos=14, neg=6
+[2026-04-08 15:15:56] [A1] [TOOL]    cluster_themes() called — 30 items
+[2026-04-08 15:15:56] [A1] [TOOL]    cluster_themes() → 5 themes found
+[2026-04-08 15:15:56] [A1] [TOOL]    summarize_feedback() called — 30 items, top_n=5
+[2026-04-08 15:15:56] [A1] [TOOL]    summarize_feedback() → top phrases: ['app', 'checkout', 'payment', 'update', 'new']
+[2026-04-08 15:15:57] [A1] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1666
+[2026-04-08 15:15:57] [A1] [LLM]     groq.chat() → tokens_out=301, latency=1.0s
+[2026-04-08 15:15:57] [A1] [STAGE 2] [MarketingComms] END — took 1.0s
+[2026-04-08 15:15:57] [A1] [STAGE 3] [INFO] Entering stage: PM
+[2026-04-08 15:15:57] [A1] [STAGE 3] [ProductManager] START
+[2026-04-08 15:15:58] [A1] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=1387
+[2026-04-08 15:15:58] [A1] [LLM]     groq.chat() → tokens_out=256, latency=1.4s
+[2026-04-08 15:15:58] [A1] [STAGE 3] [ProductManager] END — took 1.4s
+[2026-04-08 15:15:58] [A1] [STAGE 4] [INFO] Entering stage: FINANCE
+[2026-04-08 15:15:58] [A1] [STAGE 4] [Finance] START
+[2026-04-08 15:15:58] [A1] [TOOL]    analyze_metrics() called — 3 metrics, launch_day=7
+[2026-04-08 15:15:58] [A1] [TOOL]    analyze_metrics() → analyzed 3 metrics
+[2026-04-08 15:16:00] [A1] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=396
+[2026-04-08 15:16:00] [A1] [LLM]     groq.chat() → tokens_out=286, latency=1.2s
+[2026-04-08 15:16:00] [A1] [STAGE 4] [Finance] END — took 1.2s
+[2026-04-08 15:16:00] [A1] [STAGE 5] [INFO] Entering stage: GROWTH
+[2026-04-08 15:16:00] [A1] [STAGE 5] [Growth] START
+[2026-04-08 15:16:00] [A1] [TOOL]    analyze_metrics() called — 4 metrics, launch_day=7
+[2026-04-08 15:16:00] [A1] [TOOL]    analyze_metrics() → analyzed 4 metrics
+[2026-04-08 15:16:00] [A1] [TOOL]    trend_compare() called — comparing against 1 thresholds
+[2026-04-08 15:16:00] [A1] [TOOL]    trend_compare() → 1/1 passed
+[2026-04-08 15:16:00] [A1] [TOOL]    trend_compare() called — comparing against 1 thresholds
+[2026-04-08 15:16:00] [A1] [TOOL]    trend_compare() → 1/1 passed
+[2026-04-08 15:16:00] [A1] [TOOL]    trend_compare() called — comparing against 1 thresholds
+[2026-04-08 15:16:00] [A1] [TOOL]    trend_compare() → 1/1 passed
+[2026-04-08 15:16:00] [A1] [TOOL]    trend_compare() called — comparing against 1 thresholds
+[2026-04-08 15:16:00] [A1] [TOOL]    trend_compare() → 1/1 passed
+[2026-04-08 15:16:00] [A1] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=600
+[2026-04-08 15:16:00] [A1] [LLM]     groq.chat() → tokens_out=167, latency=0.9s
+[2026-04-08 15:16:00] [A1] [STAGE 5] [Growth] END — took 1.0s
+[2026-04-08 15:16:00] [A1] [STAGE 6] [INFO] Entering stage: RISK
+[2026-04-08 15:16:00] [A1] [STAGE 6] [RiskCritic] START
+[2026-04-08 15:16:00] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:16:00] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[10]
+[2026-04-08 15:16:00] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:16:00] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[4, 10]
+[2026-04-08 15:16:00] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:16:00] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[10]
+[2026-04-08 15:16:00] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:16:00] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[4, 10]
+[2026-04-08 15:16:00] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:16:01] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[9]
+[2026-04-08 15:16:01] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:16:01] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[9]
+[2026-04-08 15:16:01] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:16:01] [A1] [TOOL]    detect_anomalies() → anomaly=Yes, indices=[9]
+[2026-04-08 15:16:01] [A1] [TOOL]    detect_anomalies() called — series_len=14, threshold=1.5
+[2026-04-08 15:16:01] [A1] [TOOL]    detect_anomalies() → anomaly=No, indices=[]
+[2026-04-08 15:16:03] [A1] [LLM]     groq.chat() called — model=llama-3.3-70b-versatile, tokens_in=2831
+[2026-04-08 15:16:03] [A1] [LLM]     groq.chat() → tokens_out=513, latency=2.3s
+[2026-04-08 15:16:03] [A1] [STAGE 6] [RiskCritic] END — took 2.3s
+[2026-04-08 15:16:03] [A1] [STAGE 7] [INFO] Entering stage: AGGREGATE
+[2026-04-08 15:16:03] [A1] [STAGE 7] [INFO] Final decision: Pause (confidence: 0.38)
