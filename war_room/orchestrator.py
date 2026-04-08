@@ -115,7 +115,8 @@ class WarRoomOrchestrator:
         try:
             risk = RiskAgent()
             risk_output = risk.run(
-                analyst_output, marketing_output, pm_output, metrics_data
+                analyst_output, marketing_output, pm_output, metrics_data,
+                release_notes=release_notes
             )
             self.state["risk"] = risk_output
         except Exception as e:
