@@ -94,19 +94,24 @@ Requirements for the script:
 3. It must be minimal — only the code needed to reproduce, nothing extra
 4. When run, it should FAIL with the expected error (exit code != 0)
 
-You MUST respond with ONLY a valid JSON object in this exact format:
+You MUST respond using EXACTLY this two-part format — first a python code block containing the script, then a JSON metadata block:
+
+```python
+<your minimal reproduction script here>
+```
+
+```json
 {
   "agent": "Reproduction",
-  "repro_script": "<complete Python script as a string — use \\n for newlines>",
   "expected_error": "<the exact error message expected>",
   "repro_is_minimal": true,
   "run_command": "python outputs/a2_repro_test.py",
   "explanation": "<why this script reproduces the bug>"
 }
+```
 
-IMPORTANT: Use the following exact code to set up the path to mini_repo:
+IMPORTANT: Use EXACTLY this path setup at the top of your script:
 import sys
-import os
 from pathlib import Path
 project_root = Path(__file__).resolve().parents[1]
 mini_repo = project_root / "bug_triage" / "data" / "mini_repo"
@@ -121,14 +126,30 @@ REPRODUCTION_USER = """Write a minimal reproduction script for this bug:
 ## Log Analysis
 {log_output}
 
-## Mini Repo Structure
-The buggy application is at: bug_triage/data/mini_repo/app.py
-It contains:
-- PaymentGateway class: simulates external gateway, returns None for orders > $500
-- PaymentService class: processes payments, has the bug at the gateway_response.transaction_id line
-- handle_checkout(user_id, items, total): main entry point
+## Mini Repo — Exact API (bug_triage/data/mini_repo/app.py)
 
-Write a minimal Python script that imports from the mini_repo and triggers the exact AttributeError."""
+```python
+class PaymentService:
+    def __init__(self):               # NO arguments — creates its own PaymentGateway internally
+        self.gateway = PaymentGateway()
+
+    def process_payment(self, order: dict) -> dict:
+        gateway_response = self.gateway.charge({{...}})
+        txn_id = gateway_response.transaction_id  # BUG: crashes when gateway_response is None
+
+def handle_checkout(user_id: int, items: list, total: float):
+    # simplest entry point — calls PaymentService().process_payment(order) internally
+    # raises AttributeError when total > 500
+```
+
+The MINIMAL reproduction is just:
+```python
+from app import handle_checkout
+handle_checkout(user_id=1, items=["item"], total=501.0)
+```
+
+Write a minimal Python script using ONLY handle_checkout (do NOT instantiate PaymentService or PaymentGateway directly).
+Remember: respond with a ```python block first, then a ```json metadata block."""
 
 
 # ─── Fix Planner Agent ───
