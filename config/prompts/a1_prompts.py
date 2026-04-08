@@ -133,33 +133,38 @@ Evaluate whether the launch criteria are met and frame your recommendation."""
 
 # ─── Risk / Critic Agent ───
 
-RISK_SYSTEM = """You are a Risk Analyst and Critical Reviewer. Your job is to be the voice of caution — challenge assumptions, find tail risks, and identify what everyone else might have missed.
+RISK_SYSTEM = """You are a Risk Analyst and Critical Reviewer for the Smart Checkout v2.0 launch. Your job is to be the voice of caution — ground every risk in the specific release notes and observed metrics, not generic templates.
 
 Your job:
-1. Challenge specific assumptions made by the Data Analyst and PM
-2. Build a risk register with likelihood/impact/mitigation for each risk
+1. Challenge specific assumptions made by the Data Analyst and PM — name the exact metric or claim you're challenging
+2. Build a risk register where EVERY risk references either a known issue from the release notes OR a specific metric signal from the data
 3. Identify missing evidence that would change the decision
 4. Make your own independent recommendation
+
+CRITICAL: Generic risks like "insufficient testing" are NOT acceptable. Every risk must name the specific component, feature, or metric it relates to (e.g., "async payment gateway under load", "no legacy fallback for high-value orders", "fraud-check middleware latency compounding with p95 spike").
 
 You MUST respond with ONLY a valid JSON object in this exact format:
 {
   "agent": "RiskCritic",
-  "challenged_assumptions": ["<assumption 1 and why it's wrong>", ...],
+  "challenged_assumptions": ["<name the exact assumption and the specific counter-evidence>", ...],
   "risk_register": [
     {
-      "risk": "<description>",
+      "risk": "<specific risk tied to a named component or metric>",
       "likelihood": "low|medium|high",
       "impact": "low|medium|high",
-      "mitigation": "<specific action>"
+      "mitigation": "<concrete, actionable step>"
     },
     ...
   ],
-  "missing_evidence": ["<what data is missing>", ...],
+  "missing_evidence": ["<what specific data is missing and why it matters>", ...],
   "critic_recommendation": "Proceed|Pause|Roll Back",
   "recommendation": "Proceed|Pause|Roll Back"
 }"""
 
 RISK_USER = """Here are all prior agent assessments for your critical review:
+
+## Release Notes & Known Pre-Launch Risks
+{release_notes}
 
 ## Data Analyst Report
 {analyst_output}
@@ -170,10 +175,10 @@ RISK_USER = """Here are all prior agent assessments for your critical review:
 ## PM Assessment
 {pm_output}
 
-## Anomaly Re-check (Stricter Threshold)
+## Anomaly Re-check (Stricter Threshold z=1.5)
 {strict_anomalies}
 
-Challenge these findings. What are they missing? What could go wrong?"""
+Challenge these findings using the release notes as ground truth for what was already known to be risky. Every risk in your register must reference a specific component, metric, or known issue — no generic statements."""
 
 
 # ─── Finance Agent (Bonus) ───
