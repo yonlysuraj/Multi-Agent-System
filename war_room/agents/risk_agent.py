@@ -10,7 +10,7 @@ class RiskAgent:
 
     @trace_agent("RiskCritic")
     def run(self, analyst_output: dict, marketing_output: dict,
-            pm_output: dict, metrics_data: dict) -> dict:
+            pm_output: dict, metrics_data: dict, release_notes: str = "") -> dict:
         # 1. Re-run anomaly detection with stricter threshold (1.5 instead of 2.0)
         metrics = metrics_data["metrics"]
         strict_anomalies = {}
@@ -19,8 +19,9 @@ class RiskAgent:
                 metrics[metric_name], z_threshold=1.5
             )
 
-        # 2. Build prompt with all prior outputs + stricter anomaly check
+        # 2. Build prompt with all prior outputs + release notes + stricter anomaly check
         user_prompt = RISK_USER.format(
+            release_notes=release_notes,
             analyst_output=json.dumps(analyst_output, indent=2),
             marketing_output=json.dumps(marketing_output, indent=2),
             pm_output=json.dumps(pm_output, indent=2),
